@@ -36,59 +36,13 @@
 		$("#login").on('click', function() {
 			$("#form").submit();
 		});
-		validateRule();
 	});
-	$.validator.setDefaults({
-		submitHandler : function() {
-			login();
-		}
-	});
-
-	function login() {
-		$.ajax({
-			type : "POST",
-			url : ctx + "login",
-			data : $('#form').serialize(),
-			success : function(r) {
-				if (r.code == 0) {
-					var index = layer.load(1, {
-						shade : [ 0.1, '#fff' ]
-					//0.1透明度的白色背景
-					});
-					parent.location.href = '/index';
-				} else {
-					layer.msg(r.msg);
-				}
-			},
-		});
-	}
-	function validateRule() {
-		var icon = "<i class='fa fa-times-circle'></i> ";
-		$("#form").validate({
-			rules : {
-				username : {
-					required : true
-				},
-				password : {
-					required : true
-				}
-			},
-			messages : {
-				username : {
-					required : icon + "请输入您的用户名",
-				},
-				password : {
-					required : icon + "请输入您的密码",
-				}
-			}
-		})
-	}
 </script>
 </head>
 <body class="signin">
 	<div id="big" class="signinpanel">
 		<div class="row">
-			<div class="col-sm-7">
+			<div class="col-sm-6">
 				<div class="signin-info">
 					<div class="logopanel m-b">
 						<h1>HBRSYS</h1>
@@ -107,9 +61,9 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-sm-5">
-				<form id="form" class="form-control" action="login" method="post">
-					<%-- 					<div id="error">${requestScope.message }</div> --%>
+			<div class="col-sm-6">
+				<form id="form"  action="login" method="post">
+					<div id="error">${requestScope.message }</div>
 					<h3 class="text-center">用户登录</h3>
 					<p class="m-t-md text-center">欢迎登录人事管理系统</p>
 					<div>
@@ -120,15 +74,9 @@
 						<input type="password" name="password"
 							class="form-control pword m-b" placeholder="密码" />
 					</div>
-					<!-- 					<div id="submit"> -->
-					<!-- 						<input type="submit" class="btn btn-login btn-block" value="登录" /> -->
-					<!-- 					</div> -->
-					<a id="login" class="btn btn-login btn-block">登录</a>
-					<!-- 					<input type="text" name="loginName" class="form-control uname" -->
-					<!-- 						value="admin" placeholder="账号" /> <input type="password" -->
-					<!-- 						name="password" class="form-control pword m-b" value="111111" -->
-					<!-- 						placeholder="密码" /> <input id="submit" type="submit" -->
-					<!-- 						class="btn btn-login btn-block">登录</a> -->
+					<div id="submit">
+						<input type="submit" class="btn btn-login btn-block" value="登录" />
+					</div>
 				</form>
 			</div>
 		</div>
